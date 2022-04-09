@@ -6,6 +6,5 @@ from . import views
 # basic string HTTP response
 urlpatterns = [
     path('', views.test, name='test'),
-    path('admin/', admin.site.urls),
 ]
 
