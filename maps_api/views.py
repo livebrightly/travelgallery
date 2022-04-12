@@ -13,12 +13,8 @@ BUCKET = 'travelgallerybucket'
 
 
 def default_map(request):
-    return render(request, 'default.html')
-
-
-def map_function(request):
     my_map_token = os.environ['mapbox_access_token']
-    return my_map_token
+    return render(request, 'default.html', {'my_map_token': my_map_token})
 
 
 def about(request):
