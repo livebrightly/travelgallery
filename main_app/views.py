@@ -2,27 +2,34 @@ from multiprocessing import context
 from django.shortcuts import render
 
 from django.http import HttpResponse, HttpRequest
-# import requests
-# Create your views here.
+from django.views.generic.edit import CreateView
+# from django.views.generic.edit import ListView, CreateView, UpdateView, DeleteView
+
+from .models import Image
 
 
-# # Define the test view
-# def test(request):
-#     context={
-#         'test': 'This is a test!'
-#     }
-#     return render(request, 'gallery/index.html', context)
+def home(request):
+    return HttpResponse('This is the gallery')
 
 
-# Testing with fake API via URL
-# def test(request):
-#     response=HttpRequest.GET('https://jsonplaceholder.typicode.com/posts')
-#     post=response.json()
-#     return render(HttpRequest, 'gallery/index.html', {'post': post})
+def about(request):
+    return render(request, 'gallery/about.html')
 
-def test(request):
-    return HttpResponse('This is a test')
+
+def gallery(request):
+    return HttpResponse('This is the gallery')
 
 # Define the home view
 # def home(request):
 #   return HttpResponse('<h1>Hello /ᐠ｡‸｡ᐟ\ﾉ</h1>')
+
+
+def gallery_index(request):
+    images = Image.objects.all()
+    return render(request, 'gallery/index.html', {'images': images})
+
+
+class ImageCreate(CreateView):
+    model = Image
+    fields = fields = ['url', 'description']
+    success_url = '/gallery/'

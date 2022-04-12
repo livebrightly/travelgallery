@@ -5,6 +5,9 @@ from . import views
 
 # basic string HTTP response
 urlpatterns = [
-    path('', views.test, name='test'),
+    path('', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('gallery/', views.gallery_index, name='index'),
+    # path('gallery/<int:image_id>/', views.details, name='details'),
+    path('images/create/', views.ImageCreate.as_view(), name='images_create'),
 ]
-
