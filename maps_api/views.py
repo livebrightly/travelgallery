@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Map, Image
 import os
 import uuid
 import boto3
@@ -17,8 +16,8 @@ def default_map(request):
     return render(request, 'default.html', {'my_map_token': my_map_token})
 
 
-def about(request):
-    return render(request, 'about.html')
+def aboutMapBox(request):
+    return render(request, 'aboutMapBox.html')
 
 
 def maps_index(request):

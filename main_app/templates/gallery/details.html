@@ -1,0 +1,21 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+<h1>IMAGES Details</h1>
+
+
+<div class="card">
+
+    <div class="card-content">
+        <span class="card-title">{{ image.name }}</span>
+        <p>URL: {{ image.url }}</p>
+        <p>Description: {{ image.description }}</p>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'images_update' image.id %}">Edit</a>
+        <a href="{% url 'images_delete' image.id %}">Delete</a> 
+   </div>
+</div> 
+
+
+{% endblock %} 
