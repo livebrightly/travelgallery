@@ -2,8 +2,8 @@ from multiprocessing import context
 from django.shortcuts import render
 
 from django.http import HttpResponse, HttpRequest
-from django.views.generic.edit import CreateView
-# from django.views.generic.edit import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 from .models import Image
 
@@ -31,5 +31,23 @@ def gallery_index(request):
 
 class ImageCreate(CreateView):
     model = Image
-    fields = fields = ['url', 'description']
-    success_url = '/gallery/'
+    fields = ['name', 'url', 'description']
+    success_url = '/'
+
+
+class ImageUpdate(UpdateView):
+    model = Image
+    # Let's disallow the renaming of a image by excluding the name field!
+    fields = ['name', 'url', 'description']
+    success_url = '/travel/gallery/'
+
+
+def details(request, images_id):
+    image = Image.objects.get(id=images_id)
+    return render(request, 'gallery/details.html', {
+        'image': image})
+
+
+class ImageDelete(DeleteView):
+    model = Image
+    success_url = '/travel/gallery/'

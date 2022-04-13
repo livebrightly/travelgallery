@@ -1,13 +1,20 @@
 {% extends 'base2.html' %}
 {% block content %}
 
-<h1>IMAGES Details</h1>
+<h1>IMAGES Details Index Page</h1>
 
-
+{% for image in images %}
 <div class="card">
-    <a href="/gallery/{{ image.id }}">
+    <a href="{% url 'details' image.id %}">
     <div class="card-content">
-        <span class="card-title">{{ image.url }}</span>
+        <span class="card-title">{{ image.name }}</span>
+        <p>URL: {{ image.url }}</p>
         <p>Description: {{ image.description }}</p>
-  </div>
+    </div>
+    </a>
 </div>
+{% endfor %}
+
+{% endblock %}
+
+

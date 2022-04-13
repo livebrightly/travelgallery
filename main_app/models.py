@@ -21,9 +21,13 @@ class Map(models.Model):
 
 
 class Image(models.Model):
+    name = models.CharField(max_length=200, default="new image")
     url = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
     # map = models.ForeignKey(Map, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'images_id': self.id})
