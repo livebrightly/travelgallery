@@ -15,22 +15,26 @@ class Map(models.Model):
     def __str__(self):
         return self.location
 
-  # Add this method
-    # def get_absolute_url(self):
-    #     return reverse('detail', kwargs={'map_id': self.id})
 
 
-class Image(models.Model):
+class ImageInfo(models.Model):
     name = models.CharField(max_length=200, default="new image")
     url = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
-    # map = models.ForeignKey(Map, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('detail', kwargs={'images_id': self.id})
+        return reverse('details', kwargs={'images_id': self.id})
 
-    # def __str__(self):
-    #     return f"Photo for map_id: {self.map_id} @{self.url}"
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    image = models.ForeignKey(ImageInfo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for images_id: {self.image_id} @{self.url}"
