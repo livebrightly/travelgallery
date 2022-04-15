@@ -1,4 +1,5 @@
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,6 +26,11 @@
                     <li><a href="{% url 'about' %}">About</a></li>
                     <li><a href="{% url 'index' %}">View All Image</a></li>
                     <li><a href="{% url 'images_create' %}">Add an Image</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a> </li>
+                    {% else %}
+                        <li><a href="{% provider_login_url 'google' %}">Login</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>

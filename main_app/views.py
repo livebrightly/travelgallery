@@ -2,9 +2,10 @@ from .models import ImageInfo, Photo
 import boto3
 import uuid
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.http import HttpResponse, HttpRequest
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from multiprocessing import context
+
 
 
 
@@ -37,7 +38,6 @@ class ImageInfoCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user 
         return super().form_valid(form)
-      
 
 class ImageInfoUpdate(LoginRequiredMixin, UpdateView):
     model = ImageInfo
@@ -58,7 +58,7 @@ class ImageInfoDelete(LoginRequiredMixin, DeleteView):
         obj = self.get_object()
         if obj.user != self.request.user:
             raise ValueError("You are not allowed to delete this Post")
-        return redirect('travel/gallery')
+        return super(ImageInfoDelete, self).dispatch(request, *args, **kwargs)
      
         
 def details(request, images_id):
