@@ -29,45 +29,30 @@ def gallery_index(request):
     return render(request, 'gallery/index.html', {'images': images})
 
 
-class ImageInfoCreate(LoginRequiredMixin, CreateView):
+class ImageInfoCreate(CreateView):
     model = ImageInfo
     fields = ['name', 'url', 'description']
     success_url = '/'
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user 
-        return super().form_valid(form)
-      
 
-class ImageInfoUpdate(LoginRequiredMixin, UpdateView):
+class ImageInfoUpdate(UpdateView):
     model = ImageInfo
+    # Let's disallow the renaming of a image by excluding the name field!
     fields = ['name', 'url', 'description']
     success_url = '/travel/gallery/'
 
-    def dispatch(self, request, *args, **kwargs):
-        obj = self.get_object()
-        if obj.user != self.request.user:
-            raise ValueError("You are not allowed to edit this Post")
-        return super(ImageInfoUpdate, self).dispatch(request, *args, **kwargs)
 
-class ImageInfoDelete(LoginRequiredMixin, DeleteView):
-    model = ImageInfo
-    success_url = '/travel/gallery/'
-
-    def dispatch(self, request, *args, **kwargs):
-        obj = self.get_object()
-        if obj.user != self.request.user:
-            raise ValueError("You are not allowed to delete this Post")
-        return redirect('travel/gallery')
-     
-        
 def details(request, images_id):
     image = ImageInfo.objects.get(id=images_id)
     return render(request, 'gallery/details.html', {
         'image': image})
 
 
-@login_required
+class ImageInfoDelete(DeleteView):
+    model = ImageInfo
+    success_url = '/travel/gallery/'
+
+
 def add_photo(request, images_id):
     # photo-file will be the "name" attribute on the <input type="file">
     photo_file = request.FILES.get('photo-file', None)
