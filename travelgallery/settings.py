@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # Add this
 
     # Add the following django-allauth apps
     'allauth',
@@ -143,7 +142,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 2
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/travel/about'
+LOGOUT_REDIRECT_URL = '/travel/about'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 # Additional configuration settings
 SOCIALACCOUNT_QUERY_EMAIL = True
