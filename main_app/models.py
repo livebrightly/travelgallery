@@ -16,10 +16,14 @@ class Map(models.Model):
         return self.location
 
 
+
 class ImageInfo(models.Model):
     name = models.CharField(max_length=200, default="new image")
     url = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 
     def __str__(self):
         return self.name
