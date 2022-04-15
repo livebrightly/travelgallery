@@ -58,7 +58,7 @@ class ImageInfoDelete(LoginRequiredMixin, DeleteView):
         obj = self.get_object()
         if obj.user != self.request.user:
             raise ValueError("You are not allowed to delete this Post")
-        return redirect('travel/gallery')
+        return super(ImageInfoDelete, self).dispatch(request, *args, **kwargs)
      
         
 def details(request, images_id):
