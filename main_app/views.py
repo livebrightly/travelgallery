@@ -7,7 +7,6 @@ from django.shortcuts import render, redirect
 from multiprocessing import context
 
 
-
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'travelgallerybucket'
 
