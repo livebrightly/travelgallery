@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('maps_api.urls')),
     path('travel/', include('main_app.urls')),
     path('gallery/admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 ]
