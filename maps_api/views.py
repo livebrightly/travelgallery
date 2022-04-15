@@ -38,7 +38,7 @@ def add_photo(request, map_id):
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             # we can assign to cat_id or cat (if you have a cat object)
-            image = Image(url=url, map_id=map_id)
+            image = ImageInfo(url=url, map_id=map_id)
             image.save()
         except:
             print('An error occurred uploading file to S3')
