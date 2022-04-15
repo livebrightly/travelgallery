@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Map, Image
 import os
 import uuid
 import boto3
@@ -17,8 +16,8 @@ def default_map(request):
     return render(request, 'default.html', {'my_map_token': my_map_token})
 
 
-def about(request):
-    return render(request, 'about.html')
+def aboutMapBox(request):
+    return render(request, 'aboutMapBox.html')
 
 
 def maps_index(request):
@@ -39,7 +38,7 @@ def add_photo(request, map_id):
             # build the full url string
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             # we can assign to cat_id or cat (if you have a cat object)
-            image = Image(url=url, map_id=map_id)
+            image = ImageInfo(url=url, map_id=map_id)
             image.save()
         except:
             print('An error occurred uploading file to S3')

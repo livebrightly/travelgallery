@@ -8,8 +8,7 @@ from . import views
 urlpatterns = [
     path('', views.default_map, name="default"),
     path('maps/', views.maps_index, name='index'),
-    path('about/', views.about, name="about"),
-    path('/<int:map_id>/add_photo/', views.add_photo, name='add_photo')
+    path('about/', views.aboutMapBox, name="about"),
 ]
 
 
